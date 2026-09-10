@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Based Cyber Crime First-Response and Assistance System</title>
+<style>
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+:root{
+ --bg:#04101d;--bg2:#0a1c30;--panel:#0b2137;--line:#21445f;
+ --cyan:#36dcff;--blue:#4f8cff;--white:#f4fbff;--text:#c9d9e8;
+ --muted:#86a2ba;--yellow:#ffd166;--red:#ff6476;--green:#50e0a0
+}
+html,body{margin:0;background:#01070d;color:var(--text);font-family:"Noto Sans Devanagari","Nirmala UI","Mangal","Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+body{overflow-x:hidden}
+.slide{
+ width:297mm;height:210mm;min-height:210mm;padding:15mm 18mm 11mm;
+ position:relative;overflow:hidden;display:flex;flex-direction:column;
+ page-break-after:always;break-after:page;
+ background:
+ radial-gradient(circle at 87% 8%,rgba(54,220,255,.14),transparent 24%),
+ radial-gradient(circle at 8% 92%,rgba(79,140,255,.11),transparent 28%),
+ linear-gradient(135deg,#04101d,#0a1c30 58%,#061321)
+}
+.slide:last-child{page-break-after:auto}
+.grid{position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:linear-gradient(rgba(54,220,255,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(54,220,255,.25) 1px,transparent 1px);background-size:12mm 12mm}
+.layer{position:relative;z-index:2;flex:1;min-height:0}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:4px}
+.title{margin:0 0 10px;color:var(--white);font-size:27px;line-height:1.1;font-weight:900;display:flex;align-items:center;gap:9px}
+.title:before{content:"";width:5px;height:29px;background:var(--cyan);border-radius:4px;box-shadow:0 0 16px rgba(54,220,255,.55)}
+.footer{position:relative;z-index:5;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:5px;margin-top:6px;font-size:9px;color:#64829b}
+.footer b{color:#9bb5ca}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.card{background:linear-gradient(145deg,rgba(11,35,56,.97),rgba(4,17,29,.97));border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:0 7px 22px rgba(0,0,0,.16)}
+.card h3{margin:0 0 5px;color:var(--cyan);font-size:14px}
+.card p{margin:0;font-size:11px;line-height:1.42;color:var(--text)}
+.bullets{list-style:none;padding:0;margin:3px 0}.bullets li{font-size:13px;line-height:1.42;margin:0 0 8px;padding-left:20px;position:relative}.bullets li:before{content:"◆";position:absolute;left:0;color:var(--cyan);font-size:8px;top:2px}.highlight{color:var(--white);font-weight:800}
+.keywords{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.kw{font-size:9px;font-weight:900;padding:4px 7px;border:1px solid rgba(54,220,255,.35);border-radius:20px;color:#c9f7ff;background:rgba(54,220,255,.07)}
+.quote{margin:8px 0;border-left:4px solid var(--cyan);background:rgba(54,220,255,.06);padding:9px 12px;border-radius:0 9px 9px 0;color:#e5f9ff;font-weight:700;font-size:14px}
+.visual{height:100%;min-height:65mm;border:1px solid var(--line);border-radius:12px;background:radial-gradient(circle at 50% 40%,rgba(54,220,255,.12),transparent 50%),#061525;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.visual svg{width:100%;height:100%;max-height:92mm}
+table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:rgba(5,19,32,.94)}
+th,td{padding:7px 8px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th:last-child,td:last-child{border-right:0}tr:last-child td{border-bottom:0}
+th{background:#102c47;color:var(--cyan);font-size:10px}td{font-size:9.5px;line-height:1.35;color:#cbdbe8}
+.pipeline{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap;margin:8px 0}.step{min-width:36mm;max-width:44mm;min-height:23mm;padding:8px 6px;border:1px solid #287da7;border-radius:9px;background:linear-gradient(145deg,rgba(20,92,124,.32),rgba(4,19,32,.96));display:flex;align-items:center;justify-content:center;text-align:center;color:#e8fbff;font-size:10px;font-weight:800}.arrow{color:var(--yellow);font-size:17px;font-weight:900}
+.arch{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:9px}.archcol{display:flex;flex-direction:column;gap:6px}.node{padding:8px;text-align:center;border-radius:8px;border:1px solid var(--line);background:rgba(7,25,41,.95);font-size:10px;font-weight:800;color:#d2e7f4}.node.main{border-color:#2ca9d6;background:rgba(20,103,138,.2);color:#e9fbff}.down{text-align:center;color:var(--cyan);font-weight:900}
+.cover,.end{justify-content:center;align-items:center;text-align:center}.cover{background:radial-gradient(circle at 50% 42%,rgba(22,104,150,.3),transparent 30%),linear-gradient(135deg,#020a13,#082039 58%,#020b14)}
+.shield{width:28mm;height:32mm;clip-path:polygon(50% 0,91% 15%,91% 58%,50% 100%,9% 58%,9% 15%);border:3px solid var(--cyan);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:19px;font-weight:900;filter:drop-shadow(0 0 15px rgba(54,220,255,.4));margin-bottom:6mm}
+.cover h1{font-size:34px;line-height:1.12;color:var(--white);margin:0;max-width:250mm;font-weight:950}.cover h1 span{color:var(--cyan)}.cover h3{font-size:14px;color:#99b2c8;font-weight:500;margin:9px 0 15px}
+.presented{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:10px 18px;border:1px solid var(--line);border-radius:11px;background:rgba(4,17,29,.9);text-align:left;min-width:135mm}.presented h4{margin:0 0 4px;color:var(--cyan);font-size:10px;letter-spacing:1.5px}.presented p{margin:3px 0;font-size:11px;color:#d9e8f2}.presented p:before{content:"● ";color:var(--yellow)}
+.note{font-size:9px;color:var(--muted);margin-top:7px}
+.end h1{font-size:52px;color:var(--cyan);margin:0 0 6px}.end h2{font-size:18px;color:#d9ecfa;font-weight:500;margin:0 0 18px}
+.references{columns:2;column-gap:20px}.references p{break-inside:avoid;font-size:9.5px;line-height:1.38;margin:0 0 7px}
+@media screen{body{padding:14px}.slide{width:100%;max-width:1122px;height:auto;min-height:794px;margin:0 auto 16px;box-shadow:0 14px 55px rgba(0,0,0,.55)}}
+@media print{body{background:#01070d}.slide{width:297mm;height:210mm;margin:0;box-shadow:none}}
+</style>
+</head>
+<body>
+
+<!-- Inline illustration system: all graphics are embedded, so no external image can disappear. -->
+
+<!-- 1 COVER -->
+<section class="slide cover"><div class="grid"></div><div class="layer" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+<div class="shield">AI</div>
+<div class="eyebrow">KJ College of Engineering & Management Research, Pune</div>
+<h1>AI-Based Cyber Crime<br><span>First-Response &amp; Assistance System</span></h1>
+<h3>An Intelligent Multilingual Triage &amp; Incident Support Platform</h3>
+<div class="presented">
+<div><h4>PRESENTED BY</h4><p>Akanksha Mujumale</p><p>Pooja Thopate</p><p>Mayuri Sabne</p></div>
+<div><h4>DOMAIN</h4><p>Artificial Intelligence</p><p>Cyber Security &amp; Digital Forensics</p><p>NLP • LLM • RAG</p></div>
+</div>
+<div class="note">Academic Project Presentation • Project Review</div>
+</div><div class="footer" style="position:absolute;left:18mm;right:18mm;bottom:8mm"><span>Think • Report • Stay Safe</span><b>01</b></div></section>
+
+<!-- 2 AGENDA -->
+<section class="slide"><div class="grid"></div><div class="layer">
+<div class="eyebrow">01 • OVERVIEW</div><h2 class="title">Agenda</h2>
+<div class="grid3">
+<div class="card"><h3>01 • Introduction</h3><p>Cybercrime background and need for first-response assistance.</p></div>
+<div class="card"><h3>02 • Literature Review</h3><p>Existing AI, fraud, reporting and forensic approaches.</p></div>
+<div class="card"><h3>03 • Problem Statement</h3><p>Victim confusion, evidence risk and reporting delays.</p></div>
+<div class="card"><h3>04 • Objectives</h3><p>Classification, risk assessment and guided support.</p></div>
+<div class="card"><h3>05 • Methodology</h3><p>NLP → LLM → RAG → structured response.</p></div>
+<div class="card"><h3>06 • Architecture</h3><p>Interface, API, AI engine, knowledge base and guidance.</p></div>
+<div class="card"><h3>07 • Technology</h3><p>Python, FastAPI, React, PostgreSQL, FAISS/ChromaDB.</p></div>
+<div class="card"><h3>08 • Outcomes</h3><p>Immediate, structured and multilingual assistance.</p></div>
+<div class="card"><h3>09 • References</h3><p>Research papers and official cyber resources.</p></div>
+</div>
+<div class="keywords"><span class="kw">AI</span><span class="kw">CYBER CRIME</span><span class="kw">NLP</span><span class="kw">LLM</span><span class="kw">RAG</span><span class="kw">DIGITAL EVIDENCE</span><span class="kw">RISK</span><span class="kw">REPORTING</span></div>
+</div><div class="footer"><span>AI Cyber First-Response System</span><b>02</b></div></section>
+
+<!-- 3 INTRO -->
+<section class="slide"><div class="grid"></div><div class="layer">
+<div class="eyebrow">02 • INTRODUCTION</div><h2 class="title">Why First Response Matters</h2>
+<div class="grid2">
+<div><p style="font-size:16px;line-height:1.55;color:#d8e7f2">Cyber crime is one of the fastest-growing digital threats, affecting individuals, businesses and organizations.</p>
+<ul class="bullets">
+<li><span class="highlight">Online Fraud:</span> Financial and payment-related incidents can escalate quickly.</li>
+<li><span class="highlight">Phishing &amp; Hacking:</span> Victims may lose account access or sensitive information.</li>
+<li><span class="highlight">Evidence:</span> Screenshots, transaction details, chats, emails and URLs may be important.</li>
+<li><span class="highlight">AI Assistance:</span> The proposed system provides immediate, structured guidance.</li>
+</ul><div class="keywords"><span class="kw">IMMEDIATE HELP</span><span class="kw">MULTILINGUAL</span><span class="kw">EVIDENCE</span><span class="kw">SAFETY</span></div></div>
+<div class="visual">
+<svg viewBox="0 0 500 330" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#0c3654"/><stop offset="1" stop-color="#071522"/></linearGradient></defs>
+<rect width="500" height="330" fill="url(#g1)"/><circle cx="380" cy="90" r="65" fill="#0a243b" stroke="#36dcff" stroke-width="2"/>
+<path d="M380 45l45 18v40c0 42-45 68-45 68s-45-26-45-68V63z" fill="#061525" stroke="#36dcff" stroke-width="4"/>
+<rect x="357" y="78" width="46" height="31" rx="6" fill="#36dcff" opacity=".18" stroke="#36dcff"/><circle cx="370" cy="92" r="4" fill="#36dcff"/><circle cx="390" cy="92" r="4" fill="#36dcff"/>
+<rect x="80" y="185" width="250" height="82" rx="12" fill="#071522" stroke="#21445f"/><rect x="105" y="205" width="200" height="42" rx="8" fill="#0c2a43"/><path d="M125 226h65m20 0h45" stroke="#36dcff" stroke-width="4" stroke-linecap="round"/>
+<text x="205" y="300" fill="#8da7bf" text-anchor="middle" font-size="15">CYBER THREAT → AI ASSISTANCE</text>
+</svg></div></div>
+</div><div class="footer"><span>Introduction</span><b>03</b></div></section>
+
+<!-- 4 LIT -->
+<section class="slide"><div class="grid"></div><div class="layer">
+<div class="eyebrow">03 • LITERATURE REVIEW</div><h2 class="title">Existing Research &amp; Identified Gap</h2>
+<table><tr><th>Study / Author</th><th>Methodology</th><th>Context</th><th>Contribution</th><th>Limitation</th></tr>
+<tr><td>Ananya Shenoy et al.</td><td>OCR &amp; NLP</td><td>Text, Voice &amp; Images</td><td>Multilingual reporting</td><td>Reporting focus</td></tr>
+<tr><td>Mahfuzulhoq Chowdhury et al.</td><td>Mobile reporting</td><td>Crime reports &amp; police records</td><td>Online complaint support</td><td>Limited AI analysis</td></tr>
+<tr><td>Suguna Balusamy et al.</td><td>AI &amp; ML</td><td>Digital forensics</td><td>Evidence analysis</td><td>Expert verification</td></tr>
+<tr><td>Tanvir Ahmed et al.</td><td>XGBoost, LightGBM, Logistic Regression</td><td>PaySim</td><td>Fraud detection</td><td>Financial focus</td></tr>
+<tr><td>Mahesh Kini et al.</td><td>Hybrid GNN + Attention Autoencoder</td><td>IEEE-CIS, PaySim, Credit Card</td><td>Real-time fraud detection</td><td>Financial focus</td></tr>
+<tr><td>Carla Sayan, Salim Hariri et al.</td><td>Cyber Security Assistant</td><td>Security event data</td><td>Response recommendations</td><td>Analyst focus</td></tr>
+</table>
+<div class="quote">Research Gap → A single first-response workflow combining conversational AI, classification, risk assessment, evidence preservation and reporting guidance.</div>
+</div><div class="footer"><span>Literature Review</span><b>04</b></div></section>
+
+<!-- 5 PROBLEM -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">04 • PROBLEM STATEMENT</div><h2 class="title">The First-Response Gap</h2>
+<div class="grid2"><div><ul class="bullets">
+<li><span class="highlight">Victim Confusion:</span> Panic and lack of structured immediate guidance.</li>
+<li><span class="highlight">Evidence Risk:</span> Important digital information may not be preserved correctly.</li>
+<li><span class="highlight">Reporting Difficulty:</span> Users may not know the appropriate official channel.</li>
+<li><span class="highlight">Need for Accessibility:</span> Assistance should be simple and multilingual.</li>
+</ul><div class="quote">“What should I do right now?”</div></div>
+<div class="visual"><svg viewBox="0 0 500 330" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="330" fill="#061525"/><circle cx="250" cy="118" r="68" fill="#0b2a42" stroke="#ff6476" stroke-width="3"/>
+<circle cx="225" cy="108" r="9" fill="#ff6476"/><circle cx="275" cy="108" r="9" fill="#ff6476"/><path d="M215 145q35-25 70 0" fill="none" stroke="#ff6476" stroke-width="5"/>
+<path d="M120 205h260l-25 80H145z" fill="#0a243b" stroke="#36dcff" stroke-width="3"/><rect x="175" y="220" width="150" height="35" rx="5" fill="#071522" stroke="#21445f"/>
+<text x="250" y="54" fill="#ff6476" text-anchor="middle" font-size="20" font-weight="700">SCAM • HACK • FRAUD</text><text x="250" y="312" fill="#ffd166" text-anchor="middle" font-size="16" font-weight="700">CONFUSION TODAY → BIGGER RISK TOMORROW</text>
+</svg></div></div></div><div class="footer"><span>Problem Statement</span><b>05</b></div></section>
+
+<!-- 6 OBJECTIVES -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">05 • OBJECTIVES</div><h2 class="title">Project Objectives</h2>
+<div class="grid3">
+<div class="card"><h3>01 • Instant Classification</h3><p>Process text/voice input and identify the possible cybercrime category.</p></div>
+<div class="card"><h3>02 • Risk Assessment</h3><p>Assess incident severity from available incident-specific information.</p></div>
+<div class="card"><h3>03 • Evidence Preservation</h3><p>Generate a customized checklist for relevant digital evidence.</p></div>
+<div class="card"><h3>04 • Guided Support</h3><p>Provide step-by-step first-response and reporting guidance.</p></div>
+<div class="card"><h3>05 • Multilingual</h3><p>Support English, Hindi and Marathi interaction.</p></div>
+<div class="card"><h3>06 • Evaluation</h3><p>Evaluate accuracy, usability, multilingual support and effectiveness.</p></div>
+</div>
+<div class="quote">CLASSIFY → ASSESS → PRESERVE → GUIDE → REPORT → PROTECT</div></div><div class="footer"><span>Project Objectives</span><b>06</b></div></section>
+
+<!-- 7 METHODOLOGY -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">06 • METHODOLOGY</div><h2 class="title">Proposed Methodology &amp; Workflow</h2>
+<div class="pipeline"><div class="step">👤<br>User</div><div class="arrow">→</div><div class="step">📝<br>Text / Voice</div><div class="arrow">→</div><div class="step">🔤<br>NLP</div><div class="arrow">→</div><div class="step">🤖<br>LLM Analysis</div><div class="arrow">→</div><div class="step">🛡️<br>Crime Identification</div></div>
+<div class="pipeline"><div class="step">⚠️<br>Risk Assessment</div><div class="arrow">→</div><div class="step">❓<br>Follow-up</div><div class="arrow">→</div><div class="step">📂<br>Evidence</div><div class="arrow">→</div><div class="step">📢<br>Complaint</div><div class="arrow">→</div><div class="step">🔒<br>Safety</div></div>
+<div class="quote" style="text-align:center">FINAL AI RESPONSE → Clear • Structured • Contextual • Multilingual</div>
+<div class="keywords"><span class="kw">INPUT PROCESSING</span><span class="kw">INCIDENT TRIAGE</span><span class="kw">RISK</span><span class="kw">EVIDENCE</span><span class="kw">REPORTING</span></div>
+</div><div class="footer"><span>Proposed Methodology</span><b>07</b></div></section>
+
+<!-- 8 ARCH -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">07 • SYSTEM ARCHITECTURE</div><h2 class="title">System Architecture</h2>
+<div class="arch">
+<div class="archcol"><div class="node main">👤 USER</div><div class="down">↓</div><div class="node">Web / Mobile Interface</div><div class="down">↓</div><div class="node">FastAPI / Flask API</div><div class="down">↓</div><div class="node">NLP Processing</div></div>
+<div class="archcol"><div class="node main">🤖 LLM ENGINE</div><div class="down">↙ &nbsp; ↘</div><div class="node">Cyber Crime Knowledge Base<br><small>Rules • Guidelines • FAQs</small></div><div class="down">↔</div><div class="node">RAG / Vector Search<br><small>ChromaDB / FAISS</small></div><div class="down">↓</div><div class="node main">Incident Classification + Risk Assessment</div></div>
+<div class="archcol"><div class="node">📂 Evidence Preservation</div><div class="down">↓</div><div class="node">🛡️ Safety Guidance</div><div class="down">↓</div><div class="node">📢 Complaint / Reporting</div><div class="down">↓</div><div class="node main">✅ FINAL AI RESPONSE</div></div>
+</div>
+<div class="note">The knowledge base and retrieval layer ground the LLM response in project-approved information.</div></div><div class="footer"><span>System Architecture</span><b>08</b></div></section>
+
+<!-- 9 TECH -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">08 • TECHNOLOGY STACK</div><h2 class="title">Technology Stack</h2>
+<div class="grid3">
+<div class="card"><h3>⚛ Frontend</h3><p><b>React.js / HTML / CSS / JavaScript</b><br>Responsive user interface.</p></div>
+<div class="card"><h3>🐍 Backend</h3><p><b>Python + FastAPI / Flask</b><br>API and application logic.</p></div>
+<div class="card"><h3>🧠 AI / LLM</h3><p><b>Large Language Model</b><br>Incident understanding and response.</p></div>
+<div class="card"><h3>🔤 NLP</h3><p><b>spaCy / Transformers</b><br>Natural-language processing.</p></div>
+<div class="card"><h3>🔎 RAG</h3><p><b>RAG Pipeline</b><br>Context retrieval from knowledge base.</p></div>
+<div class="card"><h3>🗃 Vector DB</h3><p><b>ChromaDB / FAISS</b><br>Semantic search.</p></div>
+<div class="card"><h3>🐘 Database</h3><p><b>PostgreSQL</b><br>Application and session data.</p></div>
+<div class="card"><h3>☁ Deployment</h3><p><b>Cloud / VPS</b><br>Future online deployment.</p></div>
+<div class="card"><h3>🎙 Voice</h3><p><b>Speech-to-Text</b><br>Future multilingual voice input.</p></div>
+</div></div><div class="footer"><span>Technology Stack</span><b>09</b></div></section>
+
+<!-- 10 WORKING -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">09 • WORKING EXAMPLE</div><h2 class="title">Live Case Walkthrough — Financial Fraud</h2>
+<div class="grid2">
+<div>
+<div class="card" style="margin-bottom:8px"><h3>👤 Victim Input</h3><p style="font-size:14px;color:#e9f9ff">“माझ्या बँक खात्यातून नकळत ₹२५,००० कापले गेले आहेत.”</p></div>
+<div class="card" style="margin-bottom:8px"><h3>🤖 AI Analysis</h3><p><b>Category:</b> Possible Unauthorized Financial Fraud<br><b>Risk:</b> <span class="badge red">HIGH / CRITICAL</span> based on incident details</p></div>
+<div class="card"><h3>❓ Follow-up</h3><p>Transaction कधी झाली? UTR/Reference Number? कोणता bank/UPI service? Screenshot उपलब्ध आहे का?</p></div>
+</div>
+<div>
+<div class="visual" style="min-height:75mm"><svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="360" fill="#061525"/><rect x="145" y="25" width="210" height="310" rx="28" fill="#101f2d" stroke="#36dcff" stroke-width="4"/><rect x="164" y="55" width="172" height="190" rx="8" fill="#eef7fb"/><text x="250" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#10283d">UPI PAYMENT</text><text x="250" y="140" text-anchor="middle" font-size="28" font-weight="900" fill="#12263a">₹25,000</text><text x="250" y="170" text-anchor="middle" font-size="15" fill="#d33">UNAUTHORIZED</text><circle cx="250" cy="207" r="18" fill="#ff6476"/><path d="M250 194v20" stroke="#fff" stroke-width="4"/><circle cx="250" cy="222" r="2.5" fill="#fff"/><rect x="187" y="264" width="126" height="32" rx="16" fill="#0b6fa2"/><text x="250" y="285" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">REPORT / SECURE</text><text x="250" y="348" text-anchor="middle" font-size="14" fill="#ffd166">AI-FIRST RESPONSE</text>
+</svg></div>
+</div></div></div><div class="footer"><span>Working Example</span><b>10</b></div></section>
+
+<!-- 11 EVIDENCE -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">10 • DIGITAL EVIDENCE</div><h2 class="title">Evidence Preservation</h2>
+<div class="grid2"><div><ul class="bullets">
+<li>📸 <span class="highlight">Screenshots</span> — relevant transaction, message, profile or webpage.</li>
+<li>💳 <span class="highlight">Transaction Details</span> — UTR, reference number, amount and time.</li>
+<li>📧 <span class="highlight">Emails</span> — retain relevant original information where available.</li>
+<li>💬 <span class="highlight">Chat Records</span> — relevant conversations and attachments.</li>
+<li>🔗 <span class="highlight">URLs / Links</span> — suspicious or malicious links.</li>
+<li>📱 <span class="highlight">Device Information</span> — relevant app/account/device details.</li>
+<li>🎙️ <span class="highlight">Audio / Voice</span> — relevant recordings when lawfully obtained.</li>
+</ul><div class="quote">PRESERVE TODAY → PROTECT TOMORROW</div></div>
+<div class="visual"><svg viewBox="0 0 500 330" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="330" fill="#061525"/><rect x="165" y="25" width="170" height="280" rx="24" fill="#0e2235" stroke="#36dcff" stroke-width="4"/><rect x="183" y="55" width="134" height="170" rx="8" fill="#0a2a42"/><path d="M205 90h90M205 125h70M205 160h90M205 195h52" stroke="#36dcff" stroke-width="7" stroke-linecap="round"/><circle cx="250" cy="270" r="13" fill="#21445f"/><path d="M78 115l52 20M370 115l52 20M85 210l52-18M363 210l52-18" stroke="#ffd166" stroke-width="3"/><text x="250" y="320" text-anchor="middle" fill="#8da7bf" font-size="15">SCREENSHOT • UTR • CHAT • URL • DEVICE</text>
+</svg></div></div></div><div class="footer"><span>Digital Evidence Preservation</span><b>11</b></div></section>
+
+<!-- 12 RAG -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">11 • AI + RAG</div><h2 class="title">Why LLM + RAG?</h2>
+<div class="grid3">
+<div class="card"><h3>🧠 LLM — Understand</h3><p>Interprets natural-language incident descriptions and supports follow-up questions.</p></div>
+<div class="card"><h3>🔎 RAG — Retrieve</h3><p>Retrieves relevant information from the project's knowledge base.</p></div>
+<div class="card"><h3>📚 Knowledge Base</h3><p>Contains project-approved guidelines, procedures, FAQs and safety information.</p></div>
+<div class="card"><h3>🎯 Context</h3><p>Combines incident information with retrieved context before response generation.</p></div>
+<div class="card"><h3>🌐 Multilingual</h3><p>Supports the proposed English, Hindi and Marathi interaction model.</p></div>
+<div class="card"><h3>🛡 Responsible AI</h3><p>Should communicate limitations and avoid unsupported legal or forensic conclusions.</p></div>
+</div>
+<div class="pipeline"><div class="step">USER INPUT</div><div class="arrow">→</div><div class="step">VECTOR SEARCH</div><div class="arrow">→</div><div class="step">RELEVANT CONTEXT</div><div class="arrow">→</div><div class="step">LLM</div><div class="arrow">→</div><div class="step">STRUCTURED RESPONSE</div></div>
+</div><div class="footer"><span>AI + RAG</span><b>12</b></div></section>
+
+<!-- 13 OUTCOME -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">12 • EXPECTED OUTCOME</div><h2 class="title">Expected Outcomes</h2>
+<div class="grid3">
+<div class="card"><h3>✓ Incident Identification</h3><p>Identify possible cybercrime categories.</p></div>
+<div class="card"><h3>✓ Immediate Guidance</h3><p>Provide clear step-by-step first response.</p></div>
+<div class="card"><h3>✓ Evidence Support</h3><p>Guide preservation of relevant digital evidence.</p></div>
+<div class="card"><h3>✓ Reporting Guidance</h3><p>Explain appropriate official reporting channels.</p></div>
+<div class="card"><h3>✓ Risk Assessment</h3><p>Highlight incident severity and preventive actions.</p></div>
+<div class="card"><h3>✓ Multilingual</h3><p>Support English, Hindi and Marathi.</p></div>
+</div><div class="quote">Safer Users • Smarter Responses • Cyber-Secure Future</div></div><div class="footer"><span>Expected Outcomes</span><b>13</b></div></section>
+
+<!-- 14 FUTURE -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">13 • FUTURE SCOPE</div><h2 class="title">Future Scope &amp; Roadmap</h2>
+<div class="grid2"><div class="grid3" style="grid-template-columns:repeat(2,1fr)">
+<div class="card"><h3>🎙 Voice Assistant</h3><p>Multilingual voice-based cyber assistance.</p></div>
+<div class="card"><h3>📂 Evidence Vault</h3><p>Secure incident-wise evidence organization.</p></div>
+<div class="card"><h3>🧾 Report Generation</h3><p>Structured incident summaries and complaint-support documents.</p></div>
+<div class="card"><h3>🔍 Artifact Assistance</h3><p>Future support for URLs, QR codes and screenshots.</p></div>
+<div class="card"><h3>📊 Dashboard</h3><p>Authorized case tracking and analytics.</p></div>
+<div class="card"><h3>🔐 Secure Integrations</h3><p>Potential integration with verified official resources.</p></div>
+</div>
+<div class="visual"><svg viewBox="0 0 500 330" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="330" fill="#061525"/><circle cx="250" cy="115" r="65" fill="#0b2b43" stroke="#36dcff" stroke-width="3"/><circle cx="225" cy="105" r="8" fill="#36dcff"/><circle cx="275" cy="105" r="8" fill="#36dcff"/><path d="M215 138q35 25 70 0" fill="none" stroke="#36dcff" stroke-width="5"/><rect x="192" y="185" width="116" height="65" rx="14" fill="#0a2237" stroke="#21445f"/><path d="M250 45V18M190 68l-23-20M310 68l23-20M184 135l-35 10M316 135l35 10" stroke="#ffd166" stroke-width="3"/><circle cx="250" cy="18" r="7" fill="#ffd166"/><circle cx="167" cy="48" r="7" fill="#ffd166"/><circle cx="333" cy="48" r="7" fill="#ffd166"/><circle cx="149" cy="145" r="7" fill="#ffd166"/><circle cx="351" cy="145" r="7" fill="#ffd166"/><text x="250" y="290" text-anchor="middle" fill="#36dcff" font-size="18" font-weight="800">AI FOR A SAFER DIGITAL TOMORROW</text>
+</svg></div></div></div><div class="footer"><span>Future Scope</span><b>14</b></div></section>
+
+<!-- 15 CONCLUSION -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">14 • CONCLUSION</div><h2 class="title">Conclusion</h2>
+<div class="grid2"><div><p style="font-size:17px;line-height:1.5;color:#e0eef7">The proposed system combines <span class="highlight">AI, NLP, LLM, RAG and a cybercrime knowledge base</span> to provide structured first-response assistance.</p>
+<ul class="bullets"><li>Identify possible incident category.</li><li>Assess immediate risk.</li><li>Ask relevant follow-up questions.</li><li>Guide evidence preservation.</li><li>Provide reporting and safety guidance.</li><li>Support multilingual interaction.</li></ul>
+<div class="quote">“When a cyber incident happens, the victim should know what to do next.”</div></div>
+<div class="visual"><svg viewBox="0 0 500 330" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="330" fill="#061525"/><circle cx="250" cy="120" r="72" fill="#09243a" stroke="#36dcff" stroke-width="3"/><path d="M250 58l49 20v45c0 45-49 75-49 75s-49-30-49-75V78z" fill="#071522" stroke="#36dcff" stroke-width="4"/><path d="M227 120l16 16 32-37" fill="none" stroke="#50e0a0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text x="250" y="270" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">CYBER SAFE • AI ASSISTED</text><text x="250" y="298" text-anchor="middle" fill="#ffd166" font-size="14">EMPOWERING PEOPLE THROUGH FIRST RESPONSE</text>
+</svg></div></div></div><div class="footer"><span>Conclusion</span><b>15</b></div></section>
+
+<!-- 16 REFERENCES -->
+<section class="slide"><div class="grid"></div><div class="layer"><div class="eyebrow">15 • REFERENCES</div><h2 class="title">References &amp; Resources</h2>
+<div class="references">
+<p>1. Ahmed, T., Ferdus, M. J., Parvez, R., et al. “Financial Fraud Detection Using Synthetic Dataset: An Analysis of Machine Learning Algorithms,” IEEE eIT, 2025.</p>
+<p>2. Kini, M., Raikar, R. M., Patgar, R., et al. “Deep Learning Fraud Detection Model Based on Machine Learning: A Hybrid GNN Along with Attention Autoencoder Approach,” COMP-SIF, IEEE, 2026.</p>
+<p>3. Sayan, C., Hariri, S., &amp; Ball, G. “Cyber Security Assistant: Design Overview,” IEEE FASW, 2017.</p>
+<p>4. Shenoy, A., et al. “AI-Based Cybercrime Reporting Assistant Using OCR and NLP.”</p>
+<p>5. Chowdhury, M., et al. “Mobile Application for Cybercrime Reporting and Police Assistance.”</p>
+<p>6. Balusamy, S., et al. “AI and Machine Learning for Automated Evidence Collection in Cybercrime Investigation.”</p>
+<p>7. Lewis et al. — Retrieval-Augmented Generation research.</p>
+<p>8. OpenAI Research — Large Language Model research.</p>
+<p>9. National Cyber Crime Reporting Portal (India) — cybercrime.gov.in</p>
+<p>10. Indian Computer Emergency Response Team (CERT-In) — cert-in.org.in</p>
+<p>11. OWASP Foundation — owasp.org</p>
+<p>12. Python Software Foundation — python.org</p>
+</div></div><div class="footer"><span>References</span><b>16</b></div></section>
+
+<!-- 17 END -->
+<section class="slide end"><div class="grid"></div><div class="layer" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+<div class="shield">✓</div><h1>Thank You</h1><h2>Questions &amp; Discussion</h2>
+<div class="presented"><div><h4>PRESENTED BY</h4><p>Akanksha Mujumale</p><p>Pooja Thopate</p><p>Mayuri Sabne</p></div><div><h4>KEYWORDS</h4><p>AI • Cyber Crime</p><p>NLP • LLM • RAG</p><p>Digital Evidence • Risk Assessment</p></div></div>
+</div><div class="footer" style="position:absolute;left:18mm;right:18mm;bottom:8mm"><span>Think • Report • Stay Safe</span><b>17</b></div></section>
+
+</body>
+</html>
